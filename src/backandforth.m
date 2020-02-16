@@ -1,5 +1,9 @@
 function pBasis = backandforth(trajType,BCt,BCp,np,showFig)
 
+if nargin < 5
+    showFig = false;
+end
+
 trajType = lower(trajType);
 nofpoly = length(BCt)-1;
 pBasis_set = cell(1,nofpoly);
