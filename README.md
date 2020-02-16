@@ -1,5 +1,5 @@
 # TrajectTools
-Polynomial trajectory generation tools for MATLAB.
+Polynomial trajectory generation tools for MATLAB. Analytical differentiation is calculated. 
 
 ## Step trajectory
 See [example](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/ex1_step.m)
@@ -11,3 +11,6 @@ See [example](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/ex2
 
 ![ex2](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/plot/png/ex2.png?raw=true)
 
+## Required toolbox
+* Symbolic math toolbox
+* Optional: [FigTools](https://github.com/ThomasBeauduin/FigTools)
