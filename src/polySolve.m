@@ -4,7 +4,7 @@ function pBasis = polySolve(t0,t1,initval,finval,n,showFig)
 % pBasis = polyTraj(t0,t1,initval,finval,n,showFig)
 % pBasis.a_vpas : coeffs in vpa
 % pBasis.a_syms : coeffs in symbolic
-% plot function : y = pltPolyBasis(pBasis,n,t)
+% plot function : y = outPolyBasis(pBasis,n,t)
 % 
 % t0      : Trajectory start time
 % t1      : Trajectory end time

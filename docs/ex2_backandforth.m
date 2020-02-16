@@ -22,10 +22,10 @@ pBasis = backandforth(trajType,BCt,BCp,np);
 %% Plot
 Ts = 1e-3;
 t = 0:Ts:7;
-y1 = pltPolyBasis(pBasis,1,t);
-y2 = pltPolyBasis(pBasis,2,t);
-y3 = pltPolyBasis(pBasis,3,t);
-y4 = pltPolyBasis(pBasis,4,t);
+y1 = outPolyBasis(pBasis,1,t);
+y2 = outPolyBasis(pBasis,2,t);
+y3 = outPolyBasis(pBasis,3,t);
+y4 = outPolyBasis(pBasis,4,t);
 
 hfig = figure; 
 subplot(2,2,1);

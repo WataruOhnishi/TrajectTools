@@ -24,7 +24,7 @@ pBasis = pBasis_set;
 if showFig
     dt = (pBasis{end}.BCt(end)-pBasis{1}.BCt(1));
     t = pBasis{1}.BCt(1)-dt/10:dt/1000:pBasis{end}.BCt(end)+dt/10;
-    pltPolyBasis(pBasis,1,t,showFig);
+    outPolyBasis(pBasis,1,t,showFig);
 end
 
 end
