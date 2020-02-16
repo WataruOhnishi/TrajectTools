@@ -41,5 +41,7 @@ title('jerk');
 
 % FigTools required
 % https://github.com/ThomasBeauduin/FigTools
-pfig = pubfig(hfig);
-expfig('ex1','-png');
+if exist('pubfig','file')
+    pfig = pubfig(hfig);
+    expfig('ex1','-png');
+end

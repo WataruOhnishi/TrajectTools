@@ -6,7 +6,7 @@ tdwell = 0.5; % dwelling time
 % time boundary conditions
 BCt = [tdwell, tdwell+tmove, tdwell+tmove+tdwell, tdwell+tmove+tdwell+tmove,...
     tdwell+tmove+tdwell+tmove+tdwell,tdwell+tmove+tdwell+tmove+tdwell+tmove,...
-    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell,tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell+tmove]; 
+    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell,tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell+tmove];
 
 % motion distance
 pmove = 0.3;
@@ -16,7 +16,7 @@ BCp = [0, pmove, pmove, 0, 0, pmove, pmove, 0];
 % polynomial order
 np = 5;
 
-% Polynomial Trajectory generation 
+% Polynomial Trajectory generation
 pBasis = backandforth(trajType,BCt,BCp,np);
 
 %% Plot
@@ -27,7 +27,7 @@ y2 = outPolyBasis(pBasis,2,t);
 y3 = outPolyBasis(pBasis,3,t);
 y4 = outPolyBasis(pBasis,4,t);
 
-hfig = figure; 
+hfig = figure;
 subplot(2,2,1);
 plot(t,y1);
 xlabel('time [s]');
@@ -47,6 +47,7 @@ title('jerk');
 
 % FigTools required
 % https://github.com/ThomasBeauduin/FigTools
-pfig = pubfig(hfig);
-expfig('ex2','-png');
-
+if exist('pubfig','file')
+    pfig = pubfig(hfig);
+    expfig('ex2','-png');
+end
