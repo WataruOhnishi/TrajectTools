@@ -49,7 +49,13 @@ end
 if showFig
     dt = (pBasis{end}.BCt(end)-pBasis{1}.BCt(1));
     t = pBasis{1}.BCt(1)-dt/10:dt/1000:pBasis{end}.BCt(end)+dt/10;
-    outPolyBasis(pBasis,1,t,showFig);
+    stitle = {'position','velocity','acceleration','jerk'};
+    hfig = figure;
+    for k = 1:4
+        subplot(2,2,k);
+        plot(t,outPolyBasis(pBasis,k,t)); xlabel('time [s]'); title(stitle{k});
+    end
+    if exist('pubfig','file'), pubfig(hfig); end
 end
 
 end
