@@ -102,12 +102,12 @@ function [BCt,indices] = pBasisToBCt(pBasis,t)
 BCt = cellfun(@(x)x.BCt(1),pBasis);
 BCt = [BCt,pBasis{end}.BCt(end)];
 
-tmp = arrayfun(@(x)find(abs(x-t)<eps),BCt,'UniformOutput',false);
+tmp = arrayfun(@(x)find(abs(x-t)<eps*5),BCt,'UniformOutput',false);
 if any(cellfun(@isempty,tmp))
     warning('Sampled time vector does not contain boudary condition!');
     indices = arrayfun(@(x)find(t<x,1,'last'),BCt)+1;
 else
-    indices = arrayfun(@(x)find(abs(x-t)<eps),BCt);
+    indices = arrayfun(@(x)find(abs(x-t)<eps*5),BCt);
 end
 end
 
