@@ -1,6 +1,7 @@
 clear; close all;
 
-trajType = 'pos';
+trajType = 'pos'; % for given position constraints 
+
 tmove = 1; % moving time
 tdwell = 0.5; % dwelling time
 % time boundary conditions

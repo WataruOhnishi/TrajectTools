@@ -92,7 +92,7 @@ if showFig
     plot(t,y);
     stitle = sprintf('$r_{%d}$',norg);
     title(stitle);
-    pfig = pubfig(hfig);
+    if exist('pubfig','file'), pubfig(hfig); end
 end
 
 end

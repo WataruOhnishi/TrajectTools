@@ -42,7 +42,7 @@ for k = 1:1:Ntime
 end
 
 
-if showFig == 1
+if showFig
     tlength = t1 - t0;
     for kk = 1:1:Nplant
         sTitle = sprintf('r_%d(t)',kk);
@@ -55,19 +55,4 @@ if showFig == 1
     end    
 end
 
-%{
-% Simulation parameter
-tst = -0.3;
-tfin = 0.3;
-% Plant parameter
-Ts = 100e-6;
-% Trajectory
-Ntraj = 11;
-initval = zeros((Ntraj+1)/2,1); % all 0
-pos1 = 10.0e-3; % final position 10mm [mm]
-finval = [pos1; zeros((Ntraj+1)/2-1,1);];
-t0 = 0;   % start time
-t1 = 0.02; % finish time
-a_poly = func_kidoun(t0,t1,initval,finval,Ntraj,0);
-[t,r] = func_poly2traj(a_poly,tst,t0,t1,tfin,Ts,initval,finval,1);
-%}
+

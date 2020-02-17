@@ -1,11 +1,23 @@
 function pBasis = backandforth(trajType,BCt,BC,np,showFig)
+%backandforth - generate polynomical basis for back and forth motion
+%
+% pBasis = backandforth(trajType,BCt,BC,np,showFig)
+%   trajType: trajectory type, 'pos', 'vel'
+%   BCt     : time boundary conditions
+%   BC      : boundary conditions, e.g. position, velocity
+%   np      : polynomial order
+%   showFig : flag to show results
+%   pBasis  : parameter for polynomial basis
+%              see outPolyBasis.m
+% Author    : Wataru Ohnishi, University of Tokyo, 2020
+%%%%%
 
 if nargin < 5
     showFig = false;
 end
 
 trajType = lower(trajType);
-nofpoly = length(BCt)-1;
+nofpoly = length(BCt)-1; % number of trajectory segments
 pBasis = cell(1,nofpoly);
 
 switch trajType

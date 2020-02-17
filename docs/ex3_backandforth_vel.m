@@ -1,6 +1,7 @@
 clear; close all;
 
-trajType = 'vel';
+trajType = 'vel'; % for given velocity constraints 
+
 tacc = 1; % acceleration time
 tvel = 1; % constant velocity time
 tdec = tacc; % deceleration time
@@ -16,7 +17,7 @@ BCt = [tdwell,... % dwell
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel+tdec,... % decelerate
     ];
 
-% motion distance
+% max velocity
 vmax = 0.5; % m/s
 % velocity boundary conditions
 BCv = [0, vmax, vmax, 0, 0, -vmax, -vmax, 0];
