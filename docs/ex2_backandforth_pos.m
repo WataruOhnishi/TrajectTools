@@ -4,9 +4,15 @@ trajType = 'pos';
 tmove = 1; % moving time
 tdwell = 0.5; % dwelling time
 % time boundary conditions
-BCt = [tdwell, tdwell+tmove, tdwell+tmove+tdwell, tdwell+tmove+tdwell+tmove,...
-    tdwell+tmove+tdwell+tmove+tdwell,tdwell+tmove+tdwell+tmove+tdwell+tmove,...
-    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell,tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell+tmove];
+BCt = [tdwell, ... % dwell
+    tdwell+tmove, ... % step motion
+    tdwell+tmove+tdwell, ... % dwell
+    tdwell+tmove+tdwell+tmove,... % step motion
+    tdwell+tmove+tdwell+tmove+tdwell,... % dwell
+    tdwell+tmove+tdwell+tmove+tdwell+tmove,... % step motion
+    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell,... % dwell 
+    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell+tmove,... % step motion
+    ]; 
 
 % motion distance
 pmove = 0.3;
