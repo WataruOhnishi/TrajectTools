@@ -3,22 +3,20 @@ clear; close all;
 trajType = 'pos'; % for given position constraints 
 
 tmove = 1; % moving time
-tdwell = 0.5; % dwelling time
+tdwell = 1; % dwelling time
 % time boundary conditions
 BCt = [tdwell, ... % dwell
     tdwell+tmove, ... % step motion
     tdwell+tmove+tdwell, ... % dwell
     tdwell+tmove+tdwell+tmove,... % step motion
-    tdwell+tmove+tdwell+tmove+tdwell,... % dwell
-    tdwell+tmove+tdwell+tmove+tdwell+tmove,... % step motion
-    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell,... % dwell 
-    tdwell+tmove+tdwell+tmove+tdwell+tmove+tdwell+tmove,... % step motion
     ]; 
+BCt = [BCt,BCt+BCt(end)]; % twice
 
 % motion distance
 pmove = 0.3;
 % position boundary conditions
-BCp = [0, pmove, pmove, 0, 0, pmove, pmove, 0];
+BCp = [0, pmove, pmove, 0];
+BCp = [BCp,BCp]; % twice
 
 % polynomial order
 np = 5;
@@ -28,7 +26,7 @@ pBasis = backandforth(trajType,BCt,BCp,np);
 
 %% Plot
 Ts = 1e-3;
-t = 0:Ts:7;
+t = 0:Ts:9;
 y1 = outPolyBasis(pBasis,1,t);
 y2 = outPolyBasis(pBasis,2,t);
 y3 = outPolyBasis(pBasis,3,t);

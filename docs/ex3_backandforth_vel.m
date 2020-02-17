@@ -16,11 +16,13 @@ BCt = [tdwell,... % dwell
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel,... % const vel
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel+tdec,... % decelerate
     ];
+BCt = [BCt,BCt+BCt(end)]; % twice
 
 % max velocity
 vmax = 0.5; % m/s
 % velocity boundary conditions
 BCv = [0, vmax, vmax, 0, 0, -vmax, -vmax, 0];
+BCv = [BCv, BCv];
 
 % polynomial order
 np = 5;
@@ -33,7 +35,7 @@ pBasis = backandforth(trajType,BCt,BC,np);
 
 %% Plot
 Ts = 1e-3;
-t = 0:Ts:8;
+t = 0:Ts:15;
 y1 = outPolyBasis(pBasis,1,t);
 y2 = outPolyBasis(pBasis,2,t);
 y3 = outPolyBasis(pBasis,3,t);
