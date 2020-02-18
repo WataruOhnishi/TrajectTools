@@ -22,7 +22,7 @@ if ~iscell(pBasis) % single poly trajectories
     pBasis = cell(1,1); pBasis{1} = test; clear test
 end
 
-if nargin < 3
+if nargin < 3 || isempty(t)
     dT = pBasis{1}.BCt(2) - pBasis{1}.BCt(1);
     Ts = dT/1000;
     t = pBasis{1}.BCt(1)-dT:Ts:pBasis{end}.BCt(2)+dT;
@@ -69,7 +69,7 @@ if ~symflag % numeric answer
     end
     for k = 1:length(BCt)-1
         y(indices(k):indices(k+1)-1) = ...
-            polyval(pBasis{k}.a_vpas(n,:),t(indices(k):indices(k+1)-1));
+            polyval(double(pBasis{k}.a_vpas(n,:)),t(indices(k):indices(k+1)-1));
     end
     if n > length(pBasis{end}.BC1)
         %             y(indices(end):end) = polyval(pBasis{end}.a_vpas(n,:),t(indices(end)));

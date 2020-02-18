@@ -16,6 +16,11 @@ See [example](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/ex3
 
 ![ex3](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/plot/png/ex3.png?raw=true)
 
+## Back and forth motion for given acceleration constraints
+See [example](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/ex4_backandforth_acc.m)
+
+![ex4](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/plot/png/ex4.png?raw=true)
+
 
 
 ## Required toolbox
