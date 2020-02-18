@@ -16,13 +16,13 @@ BCt = [tdwell,... % dwell
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel,... % const vel
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel+tdec,... % decelerate
     ];
-BCt = [BCt,BCt+BCt(end)]; % twice
+% BCt = [BCt,BCt+BCt(end)]; % twice
 
 % max velocity
 vmax = 0.5; % m/s
 % velocity boundary conditions
 BCv = [0, vmax, vmax, 0, 0, -vmax, -vmax, 0];
-BCv = [BCv, BCv];
+% BCv = [BCv, BCv];
 
 % polynomial order
 np = 5;
@@ -35,7 +35,7 @@ pBasis = backandforth(trajType,BCt,BC,np);
 
 %% Plot
 Ts = 1e-3;
-t = 0:Ts:15;
+t = 0:Ts:8;
 y1 = outPolyBasis(pBasis,1,t);
 y2 = outPolyBasis(pBasis,2,t);
 y3 = outPolyBasis(pBasis,3,t);
@@ -43,19 +43,20 @@ y4 = outPolyBasis(pBasis,4,t);
 
 hfig = figure;
 subplot(2,2,1);
-plot(t,y1);
+plot(t,y1,'b'); hold on;
 xlabel('time [s]');
 title('position');
 subplot(2,2,2);
-plot(t,y2);
+plot(t,y2,'b'); hold on;
 xlabel('time [s]');
 title('velocity');
+scatter(BCt,BCv, 'b', 'filled');
 subplot(2,2,3);
-plot(t,y3);
+plot(t,y3,'b'); hold on;
 xlabel('time [s]');
 title('acceleration');
 subplot(2,2,4);
-plot(t,y4);
+plot(t,y4,'b'); hold on;
 xlabel('time [s]');
 title('jerk');
 

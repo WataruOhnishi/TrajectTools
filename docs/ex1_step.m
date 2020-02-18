@@ -23,19 +23,23 @@ y4 = outPolyBasis(pBasis,4,t);
 
 hfig = figure; 
 subplot(2,2,1);
-plot(t,y1);
+plot(t,y1,'b'); hold on;
+scatter([t0,t1],[initval(1),finval(1)], 'b', 'filled');
 xlabel('time [s]');
 title('position');
 subplot(2,2,2);
-plot(t,y2);
+plot(t,y2,'b'); hold on;
+scatter([t0,t1],[initval(2),finval(2)], 'b', 'filled');
 xlabel('time [s]');
 title('velocity');
 subplot(2,2,3);
-plot(t,y3);
+plot(t,y3,'b'); hold on;
+scatter([t0,t1],[initval(3),finval(3)], 'b', 'filled');
 xlabel('time [s]');
 title('acceleration');
 subplot(2,2,4);
-plot(t,y4);
+plot(t,y4,'b'); hold on;
+scatter([t0,t1],[initval(4),finval(4)], 'b', 'filled');
 xlabel('time [s]');
 title('jerk');
 
