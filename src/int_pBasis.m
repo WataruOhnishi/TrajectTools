@@ -41,6 +41,7 @@ out{1}.a_syms = [temp; ...
 out{1}.a_vpas = double(out{1}.a_syms);
 out{1}.BC1 = [polyval(out{1}.a_vpas(1,:),out{1}.BCt(2));...
     pBasis{1}.BC1;];
+out{1} = orderfields(out{1});
 
 for k = 2:nofpoly
     out{k}.BCt = pBasis{k}.BCt;
@@ -53,5 +54,6 @@ for k = 2:nofpoly
     out{k}.a_vpas = double(out{k}.a_syms);
     out{k}.BC1 = [polyval(out{k}.a_vpas(1,:),out{k}.BCt(2));...
         pBasis{k}.BC1];
+    out{k} = orderfields(out{k});
 end
 end

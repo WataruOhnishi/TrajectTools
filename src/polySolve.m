@@ -82,6 +82,7 @@ pBasis.a_syms = a_syms;
 pBasis.BCt = [t0,t1];
 pBasis.BC0 = initval;
 pBasis.BC1 = finval;
+pBasis = orderfields(pBasis);
 
 
 if showFig == 1

@@ -38,5 +38,6 @@ for k = 1:nofpoly
         polyval(double(out{k}.a_syms(end,:)),out{k}.BCt(1));];
     out{k}.BC1 = [pBasis{k}.BC1(2:end,:);...
         polyval(double(out{k}.a_syms(end,:)),out{k}.BCt(2));];
+    out{k} = orderfields(out{k});    
 end
 end
