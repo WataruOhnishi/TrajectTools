@@ -43,9 +43,13 @@ switch trajType
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
         end
     case 'acc'
-        BCa = BC{1};
+        % BC (cell) denotes
+        % BC{1}: initial position
+        % BC{2}: velocity boundary conditions
+        % BC{2}: acceleration boundary conditions
+        BCp0 = BC{1};
         BCv0 = BC{2};
-        BCp0 = BC{3};
+        BCa = BC{3};
         % generate acceleration trajectory
         for k = 1:nofpoly % boudary condition calc for each segments
             initval = [BCa(k); zeros((polyOrder+1)/2-1,1);];

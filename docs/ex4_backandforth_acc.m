@@ -30,9 +30,9 @@ np = 3;
 % Polynomial Trajectory generation
 
 BC = cell(2,1);
-BC{1} = BCa; % initial position
+BC{1} = 0; % initial position
 BC{2} = 0; % initial velocity
-BC{3} = 0; % initial position
+BC{3} = BCa; % initial position
 pBasis = backandforth(trajType,BCt,BC,np,true);
 
 %% Plot
