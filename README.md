@@ -1,8 +1,14 @@
 # TrajectTools
 Polynomial trajectory generation tools for MATLAB. Analytical differentiation is calculated. 
 
+## Features
+* Arbitrary order trajectory
+* Analytical differentiation<br>
+No numerical differentiation, no delay
+* Symbolic coefficients as well as numerical coefficients
+
 ## Installation 
-addpath `src`
+addpath `src` to MATLAB
 ### Requred toolbox
 * Symbolic math toolbox
 * Optional: [FigTools](https://github.com/ThomasBeauduin/FigTools)
