@@ -4,6 +4,9 @@ function y = outPolyBasis(pBasis,n,t,showFig,symflag)
 % y = outPolyBasis(pBasis,n,t)
 %       pBasis : created by polySolve
 %            n : r_n (eg. r_1: posref, r_2: velref...)
+%            t : time vector
+%      showFig : flag to show figure
+%      symflag : flag to symbolic output
 % Author       : Wataru Ohnishi, the University of Tokyo, 2017
 %%%%%
 
@@ -40,7 +43,6 @@ for k = 1:npoly
 end
 
 t_segmentIdx = segmentIdx(pBasis,t);
-
 
 if ~symflag % numeric answer
     y = zeros(1,length(t));
@@ -90,4 +92,3 @@ BCt = [BCt,pBasis{end}.BCt(end),inf]; % inf for final segment
 t_segmentIdx = arrayfun(@(x)find(x<BCt,1,'first'),t) - 1;
 
 end
-
