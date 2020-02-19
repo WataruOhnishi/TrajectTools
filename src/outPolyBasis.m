@@ -39,7 +39,8 @@ for k = 1:npoly
     end
 end
 
-[BCt,t_segmentIdx] = pBasisToBCt(pBasis,t);
+t_segmentIdx = segmentIdx(pBasis,t);
+
 
 if ~symflag % numeric answer
     y = zeros(1,length(t));
@@ -56,20 +57,19 @@ if ~symflag % numeric answer
         end
     end
 else % symbolic answer
-    nmax = max(cellfun(@(x)length(x.a_vpas),pBasis));
-    T_sym2 = sym('t_sym_',[nmax,1]);
-    for k = 1:length(T_sym2)
-        T_sym2(k) = t_sym^(k-1);
+    y = sym('y',[1,length(t)],'real');
+    for k = 0:1:npoly+1
+        if k == 0
+            idx = t_segmentIdx == 0;
+            y(idx) = 0;
+        elseif k <= npoly
+            idx = t_segmentIdx == k;
+            y(idx) = subs(poly2sym(pBasis{k}.a_syms(n,:)),t(idx));
+        else
+            idx = t_segmentIdx == npoly+1;
+            y(idx) = pBasis{end}.BC1(n);
+        end
     end
-    T_sym2 = flipud(T_sym2);
-    
-    y = sym('y',[1,length(t)]);
-    y(1:indices(1)-1) = pBasis{1}.BC0(n);
-    for k = 1:length(BCt)-1
-        y(indices(k):indices(k+1)-1) = ...
-            subs(pBasis{k}.a_syms(n,:)*T_sym2,t_sym,t(indices(k):indices(k+1)-1));
-    end
-    y(indices(end):end) = pBasis{end}.BC0(n);
 end
 
 if showFig
@@ -83,7 +83,7 @@ end
 end
 
 
-function [BCt,t_segmentIdx] = pBasisToBCt(pBasis,t)
+function t_segmentIdx = segmentIdx(pBasis,t)
 BCt = cellfun(@(x)x.BCt(1),pBasis);
 BCt = [BCt,pBasis{end}.BCt(end),inf]; % inf for final segment
 
