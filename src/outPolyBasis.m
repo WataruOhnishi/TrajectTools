@@ -6,11 +6,12 @@ function y = outPolyBasis(pBasis,n,t,showFig,symflag)
 %            n : r_n (eg. r_1: posref, r_2: velref...)
 %            t : time vector
 %      showFig : flag to show figure
+%                1: plot, 2: plot with derivatives
 %      symflag : flag to symbolic output
 % Author       : Wataru Ohnishi, the University of Tokyo, 2017
 %%%%%
 
-if nargin < 2, n = 1; end
+if nargin < 2 || isempty(n), n = 1; end
 if nargin < 4, showFig = false; end
 if nargin < 5, symflag = false; end
 if ~iscell(pBasis) % single poly trajectories
@@ -82,11 +83,20 @@ else % symbolic answer
     end
 end
 
-if showFig
+if showFig == 1 % show plot
     hfig = figure;
     plot(t,y);
     stitle = sprintf('$r_{%d}$',norg);
     title(stitle);
+    if exist('pubfig','file'), pubfig(hfig); end
+elseif showFig == 2 % show plot with derivatives
+    stitle = {'position','velocity','acceleration','jerk'};
+    hfig = figure;
+    for k = 1:4
+        subplot(2,2,k); plot(t,outPolyBasis(pBasis,k,t,0));
+        title(stitle{k});
+        xlabel('time [s]');
+    end 
     if exist('pubfig','file'), pubfig(hfig); end
 end
 
