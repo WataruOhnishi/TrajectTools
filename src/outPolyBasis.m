@@ -1,13 +1,15 @@
-function y = outPolyBasis(pBasis,n,t,showFig,symflag)
+function varargout = outPolyBasis(pBasis,n,t,showFig,symflag)
 % outPolyBasis - output value of polynomial basis functions
 %
-% y = outPolyBasis(pBasis,n,t)
+% [y,hfig] = outPolyBasis(pBasis,n,t)
 %       pBasis : created by polySolve
 %            n : r_n (eg. r_1: posref, r_2: velref...)
 %            t : time vector
 %      showFig : flag to show figure
 %                1: plot, 2: plot with derivatives
 %      symflag : flag to symbolic output
+%            y : output polynomial
+%         hfig : figure handle optionally created by showFig
 % Author       : Wataru Ohnishi, the University of Tokyo, 2017
 %%%%%
 
@@ -83,21 +85,24 @@ else % symbolic answer
     end
 end
 
+varargout{1} = y;
+
 if showFig == 1 % show plot
     hfig = figure;
     plot(t,y);
     stitle = sprintf('$r_{%d}$',norg);
     title(stitle);
-    if exist('pubfig','file'), pubfig(hfig); end
+    if exist('pubfig','file'), hfig = pubfig(hfig); end
+    varargout{2} = hfig;
 elseif showFig == 2 % show plot with derivatives
     stitle = {'position','velocity','acceleration','jerk'};
     hfig = figure;
     for k = 1:4
         subplot(2,2,k); plot(t,outPolyBasis(pBasis,k,t,0));
-        title(stitle{k});
-        xlabel('time [s]');
-    end 
-    if exist('pubfig','file'), pubfig(hfig); end
+        title(stitle{k}); xlabel('time [s]');
+    end
+    if exist('pubfig','file'), hfig = pubfig(hfig); end
+    varargout{2} = hfig;
 end
 
 end
