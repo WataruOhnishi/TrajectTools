@@ -3,7 +3,7 @@ clear; close all;
 trajType = 'acc'; % for given acceleration constraints 
 
 tjrk = 1.5; % jrk time
-tconstacc = 1;
+tconstacc = 1; % constant acceleration time
 tconstvel = 1; % constant velocity time
 tdwell = 0.5; % dwelling time
 % time boundary conditions
@@ -18,21 +18,20 @@ BCt = [tdwell,... % dwell
     ];
 BCt = [BCt,BCt+BCt(end)]; % go and back
 
-% max velocity
+% max acceleration
 amax = 1; % m/s
-% velocity boundary conditions
+% acceleration boundary conditions
 BCa = [0, amax, amax, 0, 0, -amax, -amax, 0];
 BCa = [BCa, -BCa];
 
-% polynomial order
+% polynomial order for acceleration trajectory
 np = 3;
 
 % Polynomial Trajectory generation
-
 BC = cell(2,1);
 BC{1} = 0; % initial position
 BC{2} = 0; % initial velocity
-BC{3} = BCa; % initial position
+BC{3} = BCa; % acceleration boundary conditions
 pBasis = backandforth(trajType,BCt,BC,np,true);
 
 %% Plot
