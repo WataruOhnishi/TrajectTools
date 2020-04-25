@@ -8,7 +8,7 @@ vmax = 0.5;
 amax = 0.75;
 jmax = 2;
 smax = 20;
-[tmake4,dd] = make4(pos,vmax,amax,jmax,smax); figure
+[tmake4,dd] = make4(pos,vmax,amax,jmax,smax);
 [dj,tx,d,j,a,v,p,tt] = profile4(tmake4,smax,tmake4(1)*1e-2,false);
 
 tstart = 0.5;
@@ -27,7 +27,7 @@ BC{1} = 0; % initial position
 BC{2} = 0; % initial velocity
 BC{3} = 0; % initial acceleration
 BC{4} = BCj; % acceleration boundary conditions
-pBasis = backandforth(trajType,BCt,BC,np,true);
+pBasis = backandforth(trajType,BCt,BC,np,false);
 
 %% Plot
 Ts = 1e-3;
