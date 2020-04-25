@@ -9,12 +9,12 @@ amax = 0.75;
 jmax = 2;
 smax = 20;
 [tmake4,dd] = make4(pos,vmax,amax,jmax,smax); figure
-[dj,tx,d,j,a,v,p,tt] = profile4(tmake4,smax,tmake4(1)*1e-3,true);
+[dj,tx,d,j,a,v,p,tt] = profile4(tmake4,smax,tmake4(1)*1e-2,false);
 
 tstart = 0.5;
 BCt = [tstart, tstart + tt];
 BCt = [BCt,BCt+BCt(end)]; % go and back
-jmax2 = max(abs(j));
+jmax2 = tmake4(1)*smax; % modified max jerk
 BCj = [0, 0, jmax2, jmax2, 0, 0, -jmax2, -jmax2, 0, 0, -jmax2, -jmax2, 0, 0, jmax2, jmax2, 0];
 BCj = [BCj, -BCj];
 

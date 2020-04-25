@@ -8,12 +8,12 @@ vmax = 0.5;
 amax = 0.75;
 jmax = 2;
 [tmake3,dd] = make3(pos,vmax,amax,jmax);
-[jj,tx,j,a,v,p,tt] = profile3(tmake3,dd,tmake3(1)*1e-3,false);
+[jj,tx,j,a,v,p,tt] = profile3(tmake3,dd,tmake3(1)*1e-2,false);
 
 tstart = 0.5;
 BCt = [tstart, tstart + tt];
 BCt = [BCt,BCt+BCt(end)]; % go and back
-amax2 = max(abs(a));
+amax2 = tmake3(1)*jmax; % modified max acc
 BCa = [0, 0, amax2, amax2, 0, 0, -amax2, -amax2, 0];
 BCa = [BCa, -BCa];
 
