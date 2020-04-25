@@ -45,8 +45,8 @@ switch trajType
     case 'acc'
         % BC (cell) denotes
         % BC{1}: initial position
-        % BC{2}: velocity boundary conditions
-        % BC{2}: acceleration boundary conditions
+        % BC{2}: initial velocity
+        % BC{3}: acceleration boundary conditions
         BCp0 = BC{1};
         BCv0 = BC{2};
         BCa = BC{3};
@@ -57,6 +57,23 @@ switch trajType
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
         end
         pBasis = int_pBasis(pBasis,2,[BCv0;BCp0]);
+    case 'jrk'
+        % BC (cell) denotes
+        % BC{1}: initial position
+        % BC{2}: initial velocity
+        % BC{3}: initial acceleration
+        % BC{4}: jerk boundary conditions
+        BCp0 = BC{1};
+        BCv0 = BC{2};
+        BCa0 = BC{3};
+        BCj = BC{4};
+        % generate acceleration trajectory
+        for k = 1:nofpoly % boudary condition calc for each segments
+            initval = [BCj(k); zeros((polyOrder+1)/2-1,1);];
+            finval = [BCj(k+1); zeros((polyOrder+1)/2-1,1);];
+            pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
+        end
+        pBasis = int_pBasis(pBasis,3,[BCv0;BCp0;BCa0]);
     otherwise
         error('error!')
 end
