@@ -33,3 +33,12 @@ See [example](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/ex4
 
 ![ex4](https://github.com/WataruOhnishi/TrajectTools/blob/master/docs/plot/png/ex4.png?raw=true)
 
+## 3rd order time-optimal trajectory 
+See [example](docs/ex5_backandforth_minTime_3rd.m)
+
+![ex5](docs/plot/png/ex5.png)
+
+## 4rd order time-optimal trajectory 
+See [example](docs/ex6_backandforth_minTime_4th.m)
+
+![ex6](docs/plot/png/ex6.png)
