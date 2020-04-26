@@ -18,7 +18,7 @@ jmax2 = tmake4(1)*smax; % modified max jerk
 BCj = [0, 0, jmax2, jmax2, 0, 0, -jmax2, -jmax2, 0, 0, -jmax2, -jmax2, 0, 0, jmax2, jmax2, 0];
 BCj = [BCj, -BCj];
 
-% polynomial order for acceleration trajectory
+% polynomial order for jerk trajectory
 np = 1;
 
 % Polynomial Trajectory generation
