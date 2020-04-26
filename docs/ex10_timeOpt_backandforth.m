@@ -6,16 +6,17 @@ vmax = 0.5; % max velocity
 amax = 0.75; % max acceleration
 % jmax = 4; % max jerk
 
-tfin_init = 2.8;%3; % final time
+tfin_init = 5; % final time
 d = 5; % spline degree, minimum 3
-n = 32;%8; % number of knots, typical 8
+n = 32; % number of knots
 
-tfin_opt = 3;
-tfin_infeasible = 2;
+tfin_opt = tfin_init;
+tfin_infeasible = 0;
 tfin_diff_stop = 0.01;
 itr = 1;
-maxitr = 10;%5;
+maxitr = 10;
 
+% tfin_opt minimization by bisection method
 while (abs(tfin_opt-tfin_infeasible)) > tfin_diff_stop && itr <= maxitr
     tfin = (tfin_opt+tfin_infeasible)/2;
     
@@ -45,10 +46,10 @@ while (abs(tfin_opt-tfin_infeasible)) > tfin_diff_stop && itr <= maxitr
     
     if sol.problem == 0 % feasible
         tfin_opt = tfin;
-        fprintf('iteration %d (feasible): tfin_ok=%.2f [s], tfin_ng =%.2f [s]\n',itr,tfin_opt,tfin_infeasible);
+        fprintf('iteration %d (feasible): tfin_feasible=%.2f [s], tfin_infeasible =%.2f [s]\n',itr,tfin_opt,tfin_infeasible);
     else
         tfin_infeasible = tfin;
-        fprintf('iteration %d (infeasible): tfin_ok=%.2f [s], tfin_ng =%.2f [s]\n',itr,tfin_opt,tfin_infeasible);
+        fprintf('iteration %d (infeasible): tfin_feasible=%.2f [s], tfin_infeasible =%.2f [s]\n',itr,tfin_opt,tfin_infeasible);
     end
     itr = itr + 1;
 end
