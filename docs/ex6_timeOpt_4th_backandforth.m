@@ -75,7 +75,7 @@ title('snap');
 % https://github.com/ThomasBeauduin/FigTools
 if exist('pubfig','file')
     pfig = pubfig(hfig);
-    pfig.Dimension = [18 24];
+    pfig.Dimension = [18 22];
     expfig('ex6','-png');
 end
 
