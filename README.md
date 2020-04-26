@@ -14,7 +14,7 @@ addpath `src` to MATLAB
 * Optional: [FigTools](https://github.com/ThomasBeauduin/FigTools)
 
 ## Position constrained step trajectory
-See [example](docs/docs/ex1_pos_step.m)
+See [example](docs/ex1_pos_step.m)
 
 ![ex1](docs/plot/png/ex1.png)
 
