@@ -29,7 +29,7 @@ np = 3;
 BC = cell(2,1);
 BC{1} = 0; % initial position
 BC{2} = BCv; % velocity boundary condition
-pBasis = backandforth(trajType,BCt,BC,np,true);
+pBasis = backandforth(trajType,BCt,BC,np);
 
 %% Plot
 Ts = 1e-3;
