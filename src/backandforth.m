@@ -35,13 +35,13 @@ switch trajType
         % BC{2}: velocity boundary conditions
         BCp0 = BC{1};
         BCv = BC{2};
-        dp = BCv2BCp(BCv,BCt);
-        BCp = [BCp0,cumsum(dp)+BCp0];
+        % generate acceleration trajectory
         for k = 1:nofpoly % boudary condition calc for each segments
-            initval = [BCp(k); BCv(k); zeros((polyOrder+1)/2-2,1);];
-            finval = [BCp(k+1); BCv(k+1); zeros((polyOrder+1)/2-2,1);];
+            initval = [BCv(k); zeros((polyOrder+1)/2-1,1);];
+            finval = [BCv(k+1); zeros((polyOrder+1)/2-1,1);];
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
         end
+        pBasis = int_pBasis(pBasis,1,[BCp0]);
     case 'acc'
         % BC (cell) denotes
         % BC{1}: initial position
@@ -89,19 +89,6 @@ if showFig
     end
     if exist('pubfig','file'), pubfig(hfig); end
 end
-
-end
-
-function dp = BCv2BCp(BCv,BCt)
-% delta p
-% syms t1 t2 v1 v2 t real
-% p(t) = (v2-v1)/(t2-t1) * (t-t1) + v1;
-% dp = int(p,t1,t2)
-
-dt = diff(BCt);
-vave = movmean(BCv,2); vave = vave(2:end);
-
-dp = vave.*dt;
 
 end
 

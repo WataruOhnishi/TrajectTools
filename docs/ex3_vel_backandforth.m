@@ -16,22 +16,20 @@ BCt = [tdwell,... % dwell
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel,... % const vel
     tdwell+tacc+tvel+tdec+tdwell+tacc+tvel+tdec,... % decelerate
     ];
-% BCt = [BCt,BCt+BCt(end)]; % twice
 
 % max velocity
 vmax = 0.5; % m/s
 % velocity boundary conditions
 BCv = [0, vmax, vmax, 0, 0, -vmax, -vmax, 0];
-% BCv = [BCv, BCv];
 
-% polynomial order
-np = 5;
+% velocity trajectory order
+np = 3;
 
 % Polynomial Trajectory generation
 BC = cell(2,1);
 BC{1} = 0; % initial position
 BC{2} = BCv; % velocity boundary condition
-pBasis = backandforth(trajType,BCt,BC,np);
+pBasis = backandforth(trajType,BCt,BC,np,true);
 
 %% Plot
 Ts = 1e-3;
