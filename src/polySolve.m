@@ -5,10 +5,10 @@ function pBasis = polySolve(t0,t1,initval,finval,n,showFig)
 % pBasis.a_vpas : coeffs in vpa
 % pBasis.a_syms : coeffs in symbolic
 % plot function : y = outPolyBasis(pBasis,n,t)
-% 
+%
 % t0      : Trajectory start time
 % t1      : Trajectory end time
-% initval : Initial boudary condition 
+% initval : Initial boudary condition
 % finval  : Final boudary condition
 % n       : Trajectory order (now has to be odd number)
 % showFig : Flag to show the performance (0,1)
@@ -53,13 +53,14 @@ end
 
 S = solve([Eq_init; Eq_fin;] == [initval; finval;]);
 name = fieldnames(S);
-a_vpa = zeros(length(name),1);
-a_sym = sym('a_sym_', [length(name),1],'real');
-for kk = 1:1:length(name)
-    a_vpa(kk) = getfield(S,char(name(kk)));
-    a_sym(kk) = getfield(S,char(name(kk)));
+a_vpa = zeros(n+1,1);
+a_sym = zeros(n+1,1);
+if isstruct(S)
+    for kk = 1:1:length(name)
+        a_vpa(kk) = getfield(S,char(name(kk)));
+        a_sym(kk) = getfield(S,char(name(kk)));
+    end
 end
-
 
 F_vpa = sym('f',[(n+1)/2,1]);
 F_sym = sym('f',[(n+1)/2,1]);
@@ -94,6 +95,6 @@ if showFig == 1
         title(sTitle);
         xlabel('Time [s]');
         grid on; box on;
-    end    
+    end
 end
 
