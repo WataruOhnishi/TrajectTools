@@ -54,12 +54,14 @@ end
 S = solve([Eq_init; Eq_fin;] == [initval; finval;]);
 name = fieldnames(S);
 a_vpa = zeros(n+1,1);
-a_sym = zeros(n+1,1);
 if isstruct(S)
+    a_sym = sym('a_sym_', [n+1,1],'real');
     for kk = 1:1:length(name)
         a_vpa(kk) = getfield(S,char(name(kk)));
         a_sym(kk) = getfield(S,char(name(kk)));
     end
+else
+    a_sym = zeros(n+1,1);
 end
 
 F_vpa = sym('f',[(n+1)/2,1]);
