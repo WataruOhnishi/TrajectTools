@@ -31,28 +31,30 @@ if ~iscell(pBasis), pBasis = {pBasis}; end
 nofpoly = length(pBasis); % number of trajectory segments
 out = cell(1,nofpoly);
 
+dT = pBasis{1}.BCt(2)-pBasis{1}.BCt(1);
 out{1}.BCt = pBasis{1}.BCt;
 out{1}.BC0 = [initval; pBasis{1}.BC0;];
 temp = polyint(pBasis{1}.a_syms(1,:));
 temp = [zeros(1,length(pBasis{1}.a_syms(1,:))-length(temp)+1),temp];
-temp(end) = out{1}.BC0(1)-polyval(double(temp),out{1}.BCt(1));
+temp(end) = out{1}.BC0(1)-polyval(double(temp),0);
 out{1}.a_syms = [temp; ...
     [zeros(size(pBasis{1}.a_syms,1),1),pBasis{1}.a_syms]];
 out{1}.a_vpas = double(out{1}.a_syms);
-out{1}.BC1 = [polyval(out{1}.a_vpas(1,:),out{1}.BCt(2));...
+out{1}.BC1 = [polyval(out{1}.a_vpas(1,:),dT);...
     pBasis{1}.BC1;];
 out{1} = orderfields(out{1});
 
 for k = 2:nofpoly
     out{k}.BCt = pBasis{k}.BCt;
     out{k}.BC0 = out{k-1}.BC1;
+    dT = out{k}.BCt(2) - out{k}.BCt(1);
     temp = polyint(pBasis{k}.a_syms(1,:));
     temp = [zeros(1,length(pBasis{k}.a_syms(1,:))-length(temp)+1),temp];
-    temp(end) = out{k}.BC0(1)-polyval(double(temp),out{k}.BCt(1));
+    temp(end) = out{k}.BC0(1)-polyval(double(temp),0);
     out{k}.a_syms = [temp; ...
         [zeros(size(pBasis{k}.a_syms,1),1),pBasis{k}.a_syms]];
     out{k}.a_vpas = double(out{k}.a_syms);
-    out{k}.BC1 = [polyval(out{k}.a_vpas(1,:),out{k}.BCt(2));...
+    out{k}.BC1 = [polyval(out{k}.a_vpas(1,:),dT);...
         pBasis{k}.BC1];
     out{k} = orderfields(out{k});
 end

@@ -15,7 +15,7 @@ function pBasis = backandforth(trajType,BCt,BC,polyOrder,showFig)
 if nargin < 5
     showFig = false;
 end
-if ~all(diff(BCt)>0), error('error on BCt'); end
+if any(diff(BCt)<0), error('error on BCt'); end
 
 trajType = lower(trajType);
 nofpoly = length(BCt)-1; % number of trajectory segments

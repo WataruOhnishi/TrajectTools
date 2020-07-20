@@ -27,6 +27,8 @@ if nargin < 6
     showFig = 0;
 end
 
+dT = t1 - t0; 
+if dT < 0, error('error at BCt'); end
 
 %%%%%
 syms t real
@@ -47,8 +49,8 @@ Eq_init = sym('Eq_init',[(n+1)/2,1]);
 Eq_fin = sym('Eq_fin',[(n+1)/2,1]);
 
 for kk = 1:1:(n+1)/2
-    Eq_init(kk) = subs(F(kk),t, t0);
-    Eq_fin(kk) = subs(F(kk),t, t1);
+    Eq_init(kk) = subs(F(kk),t, 0);
+    Eq_fin(kk) = subs(F(kk),t, dT);
 end
 
 S = solve([Eq_init; Eq_fin;] == [initval; finval;]);
@@ -59,6 +61,11 @@ if isstruct(S)
     for kk = 1:1:length(name)
         a_vpa(kk) = getfield(S,char(name(kk)));
         a_sym(kk) = getfield(S,char(name(kk)));
+    end
+    if length(name) < length(a)
+       for kk = length(name)+1:length(a)
+           a_sym(kk) = 0;
+       end
     end
 else
     a_sym = zeros(n+1,1);
@@ -89,11 +96,11 @@ pBasis = orderfields(pBasis);
 
 
 if showFig == 1
-    t_val = t0:(t1-t0)/100:t1;
+    t_val = 0:dT/100:dT;
     for kk = 1:1:(n+1)/2
         sTitle = sprintf('%d derivative',kk-1);
         figure;
-        plot(t_val,polyval(a_vpas(kk,:),t_val));
+        plot(t_val+t0,polyval(a_vpas(kk,:),t_val));
         title(sTitle);
         xlabel('Time [s]');
         grid on; box on;

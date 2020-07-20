@@ -55,7 +55,7 @@ if ~symflag % numeric answer
             y(idx) = 0;
         elseif k <= npoly
             idx = t_segmentIdx == k;
-            y(idx) = polyval(double(pBasis{k}.a_vpas(n,:)),t(idx));
+            y(idx) = polyval(double(pBasis{k}.a_vpas(n,:)),t(idx)-pBasis{k}.BCt(1));
         else
             idx = t_segmentIdx == npoly+1;
             if n == 1
@@ -73,7 +73,7 @@ else % symbolic answer
             y(idx) = 0;
         elseif k <= npoly
             idx = t_segmentIdx == k;
-            y(idx) = subs(poly2sym(pBasis{k}.a_syms(n,:)),t(idx));
+            y(idx) = subs(poly2sym(pBasis{k}.a_syms(n,:)),t(idx)-pBasis{k}.BCt(1));
         else
             idx = t_segmentIdx == npoly+1;
             if n == 1
