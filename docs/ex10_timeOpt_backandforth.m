@@ -47,6 +47,13 @@ while (abs(tfin_feasible-tfin_infeasible)) > tfin_diff_stop && itr <= maxitr
     if sol.problem == 0 % feasible
         tfin_feasible = tfin;
         fprintf('iteration %d (feasible): tfin_feasible=%.2f [s], tfin_infeasible =%.2f [s]\n',itr,tfin_feasible,tfin_infeasible);
+
+        t = 0:tfin_feasible/1000:tfin_feasible;
+
+        y1 = value(pos); y1 = y1.f(t);
+        y2 = value(vel); y2 = y2.f(t);
+        y3 = value(acc); y3 = y3.f(t);
+        y4 = value(jrk); y4 = y4.f(t);
     else
         tfin_infeasible = tfin;
         fprintf('iteration %d (infeasible): tfin_feasible=%.2f [s], tfin_infeasible =%.2f [s]\n',itr,tfin_feasible,tfin_infeasible);
@@ -54,40 +61,7 @@ while (abs(tfin_feasible-tfin_infeasible)) > tfin_diff_stop && itr <= maxitr
     itr = itr + 1;
 end
 
-% B-spline basis of degree d with n knots
-basis = BSplineBasis([0, tfin_feasible], d, n);
-
-% scalar (1x1) spline variable
-pos = BSpline.sdpvar(basis, [1, 1]); % position trajectory
-vel = pos.derivative(1); % velocity trajectory
-acc = pos.derivative(2); % acceleration trajectory
-jrk = pos.derivative(3); % jerk trajectory
-
-% equality constraints
-con = [pos.f(0) == 0, pos.f(tfin_feasible) == pmax, ...
-    vel.f(0) == 0, vel.f(tfin_feasible) == 0, ...
-    acc.f(0) == 0, acc.f(tfin_feasible) == 0];
-%     jrk.f(0) == 0, jrk.f(tfin) == 0];
-
-% inequality constraints
-con = [con, -vmax <= vel, vel <= vmax, ...
-    -amax <= acc, acc <= amax];
-if exist('jmax','var'), con = [con, -jmax <= jrk, jrk <= jmax]; end
-
-% Solve convex semi-Definite program (SDP)
-options = sdpsettings('verbose',1);
-sol = optimize(con, [], options);
-if sol.problem == 1, error('infeasible! something wrong'); end
-
-
 %% Plot
-t = 0:tfin_feasible/1000:tfin_feasible;
-
-y1 = value(pos); y1 = y1.f(t);
-y2 = value(vel); y2 = y2.f(t);
-y3 = value(acc); y3 = y3.f(t);
-y4 = value(jrk); y4 = y4.f(t);
-
 hfig = figure;
 subplot(2,2,1);
 plot(t,y1,'b-'); hold on
