@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css">
+<link rel="stylesheet" href="file:///c:\Users\ohnishi\.vscode\extensions\goessner.mdmath-2.7.4\themes\default\style.css">
+
+</head>
+<body class="markdown-body">
+<h1 dir="auto" id="trajecttools">TrajectTools</h1>
+<p dir="auto">Polynomial trajectory generation tools for MATLAB. Analytical differentiation is calculated.</p>
+<h2 dir="auto" id="features">Features</h2>
+<ul dir="auto">
+<li dir="auto">Arbitrary order trajectory</li>
+<li dir="auto">Analytical differentiation<br>
+No numerical differentiation, no delay</li>
+<li dir="auto">Symbolic coefficients as well as numerical coefficients</li>
+</ul>
+<h2 dir="auto" id="installation">Installation</h2>
+<p dir="auto">addpath <code>src</code> to MATLAB</p>
+<h3 dir="auto" id="requred-toolbox">Requred toolbox</h3>
+<ul dir="auto">
+<li dir="auto">Symbolic math toolbox</li>
+<li dir="auto">Optional: <a href="https://github.com/ThomasBeauduin/FigTools">FigTools</a></li>
+</ul>
+<h2 dir="auto" id="case-1-position-constrained-step-trajectory">Case 1: Position constrained step trajectory</h2>
+<p dir="auto">See <a href="docs/ex1_pos_step.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex1.png" alt="ex1" data-src="docs/plot/png/ex1.png"></p>
+<h2 dir="auto" id="case-2-position-constrained-back-and-forth-trajectory">Case 2: Position constrained back and forth trajectory</h2>
+<p dir="auto">See <a href="docs/ex2_pos_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex2.png" alt="ex2" data-src="docs/plot/png/ex2.png"></p>
+<h2 dir="auto" id="case-3-velocity-constrained-back-and-forth-trajectory">Case 3: Velocity constrained back and forth trajectory</h2>
+<p dir="auto">See <a href="docs/ex3_vel_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex3.png" alt="ex3" data-src="docs/plot/png/ex3.png"></p>
+<h2 dir="auto" id="case-4-acceleration-constrained-back-and-forth-trajectory">Case 4: Acceleration constrained back and forth trajectory</h2>
+<p dir="auto">See <a href="docs/ex4_acc_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex4.png" alt="ex4" data-src="docs/plot/png/ex4.png"></p>
+<h2 dir="auto" id="case-5-time-optimal-3rd-order-trajectory">Case 5: Time-optimal 3rd order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://jp.mathworks.com/matlabcentral/fileexchange/16352-advanced-setpoints-for-motion-systems">Advanced Setpoints for Motion Systems</a> <br>
+Ref: M. Lambrechts, Paul; Boerlage, M.; Steinbuch, “Trajectory planning and feedforward design for electromechanical motion systems,” Control Eng. Pract., vol. 13, pp. 145–157, 2005.</li>
+</ul>
+<p dir="auto">See <a href="docs/ex5_timeOpt_3rd_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex5.png" alt="ex5" data-src="docs/plot/png/ex5.png"></p>
+<h2 dir="auto" id="case-6-time-optimal-4th-order-trajectory">Case 6: Time-optimal 4th order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox-1">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://jp.mathworks.com/matlabcentral/fileexchange/16352-advanced-setpoints-for-motion-systems">Advanced Setpoints for Motion Systems</a><br>
+Ref: M. Lambrechts, Paul; Boerlage, M.; Steinbuch, “Trajectory planning and feedforward design for electromechanical motion systems,” Control Eng. Pract., vol. 13, pp. 145–157, 2005.</li>
+</ul>
+<p dir="auto">See <a href="docs/ex6_timeOpt_4th_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex6.png" alt="ex6" data-src="docs/plot/png/ex6.png"></p>
+<h2 dir="auto" id="case-7-jerk-optimal-5th-order-trajectory">Case 7: Jerk-optimal 5th order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox-2">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://gitlab.kuleuven.be/meco/splines-m">splines.m</a><br>
+Ref: W. Van Loock, G. Pipeleers, and J. Swevers, “B-spline parameterized optimal motion trajectories for robotic systems with guaranteed constraint satisfaction,” Mech. Sci., vol. 6, no. 2, pp. 163–171, 2015, doi: 10.5194/ms-6-163-2015.</li>
+<li dir="auto"><a href="https://yalmip.github.io/">YALMIP</a><br>
+Ref: J. Löfberg, “YALMIP : A Toolbox for Modeling and Optimiza- tion in MATLAB,” in Proceedings of the CACSD Conference, Taipei, Taiwan, 2004.</li>
+<li dir="auto">Appropriate solver <br>
+e.g. <a href="https://www.mosek.com/">MOSEK</a>, <a href="http://sedumi.ie.lehigh.edu/?page_id=58">SeDuMi</a></li>
+</ul>
+<p dir="auto">Jerk 2-norm minimization</p>
+<p dir="auto">See <a href="docs/ex7_jerkOpt_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex7.png" alt="ex7" data-src="docs/plot/png/ex7.png"></p>
+<h2 dir="auto" id="case-8-jerk-optimal-3rd-order-trajectory">Case 8: Jerk-optimal 3rd order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox-3">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://gitlab.kuleuven.be/meco/splines-m">splines.m</a><br>
+Ref: W. Van Loock, G. Pipeleers, and J. Swevers, “B-spline parameterized optimal motion trajectories for robotic systems with guaranteed constraint satisfaction,” Mech. Sci., vol. 6, no. 2, pp. 163–171, 2015, doi: 10.5194/ms-6-163-2015.</li>
+<li dir="auto"><a href="https://yalmip.github.io/">YALMIP</a><br>
+Ref: J. Löfberg, “YALMIP : A Toolbox for Modeling and Optimiza- tion in MATLAB,” in Proceedings of the CACSD Conference, Taipei, Taiwan, 2004.</li>
+<li dir="auto">Appropriate solver <br>
+e.g. <a href="https://www.mosek.com/">MOSEK</a>, <a href="http://sedumi.ie.lehigh.edu/?page_id=58">SeDuMi</a></li>
+</ul>
+<p dir="auto">Jerk infinity-norm minimization</p>
+<p dir="auto">See <a href="docs/ex8_jerkOpt_minInfNorm_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex8.png" alt="ex8" data-src="docs/plot/png/ex8.png"></p>
+<h2 dir="auto" id="case-9-jerk-optimal-5th-order-trajectory">Case 9: Jerk-optimal 5th order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox-4">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://gitlab.kuleuven.be/meco/splines-m">splines.m</a><br>
+Ref: W. Van Loock, G. Pipeleers, and J. Swevers, “B-spline parameterized optimal motion trajectories for robotic systems with guaranteed constraint satisfaction,” Mech. Sci., vol. 6, no. 2, pp. 163–171, 2015, doi: 10.5194/ms-6-163-2015.</li>
+<li dir="auto"><a href="https://yalmip.github.io/">YALMIP</a><br>
+Ref: J. Löfberg, “YALMIP : A Toolbox for Modeling and Optimiza- tion in MATLAB,” in Proceedings of the CACSD Conference, Taipei, Taiwan, 2004.</li>
+<li dir="auto">Appropriate solver <br>
+e.g. <a href="https://www.mosek.com/">MOSEK</a>, <a href="http://sedumi.ie.lehigh.edu/?page_id=58">SeDuMi</a></li>
+</ul>
+<p dir="auto">Weighted jerk 2-norm minimization</p>
+<p dir="auto">See <a href="docs/ex9_jerkOpt_Weight_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex9.png" alt="ex9" data-src="docs/plot/png/ex9.png"></p>
+<h2 dir="auto" id="case-10-time-optimal-5th-order-trajectory">Case 10: Time-optimal 5th order trajectory</h2>
+<h3 dir="auto" id="required-additional-toolbox-5">Required additional toolbox</h3>
+<ul dir="auto">
+<li dir="auto"><a href="https://gitlab.kuleuven.be/meco/splines-m">splines.m</a><br>
+Ref: W. Van Loock, G. Pipeleers, and J. Swevers, “B-spline parameterized optimal motion trajectories for robotic systems with guaranteed constraint satisfaction,” Mech. Sci., vol. 6, no. 2, pp. 163–171, 2015, doi: 10.5194/ms-6-163-2015.</li>
+<li dir="auto"><a href="https://yalmip.github.io/">YALMIP</a><br>
+Ref: J. Löfberg, “YALMIP : A Toolbox for Modeling and Optimiza- tion in MATLAB,” in Proceedings of the CACSD Conference, Taipei, Taiwan, 2004.</li>
+<li dir="auto">Appropriate solver <br>
+e.g. <a href="https://www.mosek.com/">MOSEK</a>, <a href="http://sedumi.ie.lehigh.edu/?page_id=58">SeDuMi</a></li>
+</ul>
+<p dir="auto">Time-optimal trajectory. More flexible than Case 6 but numerically sensitive</p>
+<p dir="auto">See <a href="docs/ex10_timeOpt_backandforth.m">example</a></p>
+<p dir="auto"><img src="docs/plot/png/ex10.png" alt="ex10" data-src="docs/plot/png/ex10.png"></p>
+
+</body>
+</html>
