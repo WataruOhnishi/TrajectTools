@@ -14,10 +14,8 @@ tstart = 0.5;
 BCt = [tstart, tstart + tt];
 BCt = [BCt,BCt+BCt(end)]; % go and back
 amax2 = tmake3(1)*jmax; % modified max acc
-% BCa = [0, 0, amax2, amax2, 0, 0, -amax2, -amax2, 0];
-% BCa = [BCa, -BCa];
-BCj = [0, jmax, jmax, jmax, 0, 0, -jmax, -jmax, 0];
-BCj = [BCj, -BCj];
+BCa = [0, 0, amax2, amax2, 0, 0, -amax2, -amax2, 0];
+BCa = [BCa, -BCa];
 
 % polynomial order for acceleration trajectory
 np = 1;
