@@ -1,7 +1,7 @@
 function pBasis = polySolve(t0,t1,initval,finval,n,showFig)
 %polySolve - Design nth order polynomial trajectory
 %
-% pBasis = polyTraj(t0,t1,initval,finval,n,showFig)
+% pBasis = polySolve(t0,t1,initval,finval,n,showFig)
 % pBasis.a_vpas : coeffs in vpa
 % pBasis.a_syms : coeffs in symbolic
 % plot function : y = outPolyBasis(pBasis,n,t)
@@ -54,18 +54,14 @@ for kk = 1:1:(n+1)/2
 end
 
 S = solve([Eq_init; Eq_fin;] == [initval; finval;]);
-name = fieldnames(S);
 a_vpa = zeros(n+1,1);
 if isstruct(S)
-    a_sym = sym('a_sym_', [n+1,1],'real');
+    name = fieldnames(S);
+    a_sym = sym(zeros(n+1,1)); % unsolved coeffs default to 0
     for kk = 1:1:length(name)
-        a_vpa(kk) = getfield(S,char(name(kk)));
-        a_sym(kk) = getfield(S,char(name(kk)));
-    end
-    if length(name) < length(a)
-       for kk = length(name)+1:length(a)
-           a_sym(kk) = 0;
-       end
+        idx = sscanf(name{kk},'a%d'); % map field 'aK' to coeff index K (avoids fieldnames alphabetical order)
+        a_vpa(idx) = S.(name{kk});
+        a_sym(idx) = S.(name{kk});
     end
 else
     a_sym = zeros(n+1,1);
