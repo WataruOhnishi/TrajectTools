@@ -9,7 +9,7 @@ No numerical differentiation, no delay
 
 ## Installation 
 addpath `src` to MATLAB
-### Requred toolbox
+### Required toolbox
 * Symbolic math toolbox
 * Optional: [FigTools](https://github.com/ThomasBeauduin/FigTools)
 

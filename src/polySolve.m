@@ -8,8 +8,8 @@ function pBasis = polySolve(t0,t1,initval,finval,n,showFig)
 %
 % t0      : Trajectory start time
 % t1      : Trajectory end time
-% initval : Initial boudary condition
-% finval  : Final boudary condition
+% initval : Initial boundary condition
+% finval  : Final boundary condition
 % n       : Trajectory order (now has to be odd number)
 % showFig : Flag to show the performance (0,1)
 % Author  : Wataru Ohnishi, University of Tokyo, 2016

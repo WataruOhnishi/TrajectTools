@@ -1,13 +1,19 @@
 function pBasis = backandforth(trajType,BCt,BC,polyOrder,showFig)
-%backandforth - generate polynomical basis for back and forth motion
+%backandforth - generate polynomial basis for back and forth motion
 %
-% pBasis = backandforth(trajType,BCt,BC,np,showFig)
-%   trajType: trajectory type, 'pos', 'vel'
-%   BCt     : time boundary conditions
-%   BC      : boundary conditions, e.g. position, velocity
-%   np      : polynomial order
-%   showFig : flag to show results
-%   pBasis  : parameter for polynomial basis
+% pBasis = backandforth(trajType,BCt,BC,polyOrder,showFig)
+%   trajType : trajectory type, 'pos', 'vel', 'acc', or 'jrk'
+%   BCt      : time boundary conditions
+%   BC       : boundary conditions
+%              'pos': position boundary conditions (vector)
+%              'vel': {initial position, velocity boundary conditions}
+%              'acc': {initial position, initial velocity,
+%                      acceleration boundary conditions}
+%              'jrk': {initial position, initial velocity,
+%                      initial acceleration, jerk boundary conditions}
+%   polyOrder: polynomial order
+%   showFig  : flag to show results
+%   pBasis   : parameter for polynomial basis
 %              see outPolyBasis.m
 % Author    : Wataru Ohnishi, University of Tokyo, 2020
 %%%%%
@@ -25,7 +31,7 @@ switch trajType
     case 'pos'
         % BC denotes the position boundary conditions
         BCp = BC;
-        for k = 1:nofpoly % boudary condition calc for each segments
+        for k = 1:nofpoly % boundary condition calc for each segments
             initval = [BCp(k); zeros((polyOrder+1)/2-1,1);];
             finval = [BCp(k+1); zeros((polyOrder+1)/2-1,1);];
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
@@ -37,7 +43,7 @@ switch trajType
         BCp0 = BC{1};
         BCv = BC{2};
         % generate acceleration trajectory
-        for k = 1:nofpoly % boudary condition calc for each segments
+        for k = 1:nofpoly % boundary condition calc for each segments
             initval = [BCv(k); zeros((polyOrder+1)/2-1,1);];
             finval = [BCv(k+1); zeros((polyOrder+1)/2-1,1);];
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
@@ -52,7 +58,7 @@ switch trajType
         BCv0 = BC{2};
         BCa = BC{3};
         % generate acceleration trajectory
-        for k = 1:nofpoly % boudary condition calc for each segments
+        for k = 1:nofpoly % boundary condition calc for each segments
             initval = [BCa(k); zeros((polyOrder+1)/2-1,1);];
             finval = [BCa(k+1); zeros((polyOrder+1)/2-1,1);];
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);
@@ -69,7 +75,7 @@ switch trajType
         BCa0 = BC{3};
         BCj = BC{4};
         % generate acceleration trajectory
-        for k = 1:nofpoly % boudary condition calc for each segments
+        for k = 1:nofpoly % boundary condition calc for each segments
             initval = [BCj(k); zeros((polyOrder+1)/2-1,1);];
             finval = [BCj(k+1); zeros((polyOrder+1)/2-1,1);];
             pBasis{k} = polySolve(BCt(k),BCt(k+1),initval,finval,polyOrder,0);

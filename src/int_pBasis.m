@@ -7,7 +7,7 @@ function out = int_pBasis(pBasis,n_int,initval)
 %   initval : initial value(s) 
 %             e.g. initval = [0;,... % initial values for the first integration
 %                            0;]; % initial values for the second integration
-%   out     : ingegrated polynomial basis
+%   out     : integrated polynomial basis
 %             see outPolyBasis
 % Author    : Wataru Ohnishi, University of Tokyo, 2020
 %%%%%
