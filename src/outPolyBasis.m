@@ -98,7 +98,7 @@ varargout{1} = y;
 if showFig == 1 % show plot
     hfig = figure;
     plot(t,y);
-    stitle = sprintf('$r_{%d}$',norg);
+    stitle = sprintf('$r_{%d}$',n);
     title(stitle);
     if exist('pubfig','file'), hfig = pubfig(hfig); end
     varargout{2} = hfig;
